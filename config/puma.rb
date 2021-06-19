@@ -6,12 +6,15 @@
 # the maximum value specified for Puma. Default is set to 5 threads for minimum
 # and maximum; this matches the default thread size of Active Record.
 #
+puts "ENV #{Rails.env.development?}"
 threads_count = ENV.fetch("RAILS_MAX_THREADS", 5)
 threads threads_count, threads_count
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 #
-port        ENV.fetch("PORT", 80)
+http_port = Rails.env.production? ? ENV.fetch("PORT", 80) : ENV.fetch("PORT", 3000)
+port	     http_port
+#port        ENV.fetch("PORT", 80)
 
 # Specifies the `environment` that Puma will run in.
 #
